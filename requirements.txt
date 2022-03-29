@@ -1,0 +1,21 @@
+# --------------------
+# Basic TensorFlow-related stuff
+# --------------------
+tensorflow_addons
+tensorflow-estimator
+tensorflow_datasets
+tensorflow_hub
+cloud-tpu-client
+google-cloud-storage
+pyyaml
+# --------------------
+# Required by via2coco
+# --------------------
+Pillow
+numpy
+scikit-image
+opencv-python-headless
+# --------------------
+# Required by dataset-tools
+# --------------------
+pycocotools
