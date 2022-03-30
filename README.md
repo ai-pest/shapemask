@@ -220,6 +220,4 @@ $ docker exec -it shapemask python /work/repo/main.py \
 * 学習時に、チェックポイントの最大保存数を指定するオプションを追加（`--keep_checkpoint_max`）。
 * 評価時に、すべてのチェックポイントを順次評価する機能を追加（`--eval_all_ckpts`）
 
----
-
 [^1]: https://arxiv.org/abs/1904.03239
