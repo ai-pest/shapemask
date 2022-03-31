@@ -1,0 +1,43 @@
+# ShapeMask ベンチマークをもとに作成
+# https://github.com/tensorflow/tpu/blob/master/benchmarks/ShapeMask_Performance_Comparison_TensorFlow_1.14_GCP.md
+
+architecture:
+  num_classes: 2    # >=2 (BG を含むため)
+  outer_box_scale: 1.00
+train:
+  iterations_per_loop: 1600
+  train_batch_size: 4
+  total_steps: 3200
+  learning_rate:
+    warmup_learning_rate: 0.0006
+    warmup_steps: 1600
+    init_learning_rate: 0.009
+    learning_rate_levels: [0.0009, 0.00009]
+    learning_rate_steps: [2400, 3200]
+  checkpoint:
+    # チェックポイントは、`gsutil cp` を使って下記からダウンロード
+    # gs://cloud-tpu-checkpoints/shapemask/retinanet/
+    path: '/path/to/resnet18-checkpoint-2018-07-31/'
+    prefix: 'resnet18/'
+    #skip_variables_regex: '.*global_step.*'
+  train_file_pattern: '/path/to/coco_tfrecord/train-*'
+resnet:
+  resnet_depth: 18
+eval:
+  val_json_file: '/path/to/coco/annotations/instances_val2017.json'
+  eval_file_pattern: '/path/to/coco_tfrecord/val-*'
+  eval_samples: 128
+  eval_batch_size: 1
+shapemask_head: 
+  use_category_for_mask: True
+  shape_prior_path: 'gs://cloud-tpu-checkpoints/shapemask/kmeans_class_priors_91x20x32x32.npy'
+  upsample_factor: 2
+shapemask_parser: 
+  aug_rand_rot: True
+  aug_rand_rot_half_pi: True
+  output_size: [256, 256]
+  outer_box_scale: 1.00
+  upsample_factor: 2
+retinanet_loss: 
+  focal_loss_alpha: 0.4
+  huber_loss_delta: 0.15
