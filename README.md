@@ -270,5 +270,6 @@ $ docker exec -it shapemask python /work/repo/mask_to_via.py \
 
 * 学習時に、チェックポイントの最大保存数を指定するオプションを追加（`--keep_checkpoint_max`）。
 * 評価時に、すべてのチェックポイントを順次評価する機能を追加（`--eval_all_ckpts`）
-
+* 推論結果を、VIA JSON 形式のアノテーションデータとして書き出す機能を追加（`inference_via.py`, `mask_to_via.py`）
+ 
 [^1]: https://arxiv.org/abs/1904.03239
